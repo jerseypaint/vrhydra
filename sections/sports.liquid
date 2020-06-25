@@ -1,0 +1,52 @@
+<section class="sports">
+    <div class="vr_container">
+        <div class="vr_grid">
+            {% for block in section.blocks %}
+                <div class="item">
+                    <div class="image-wrap">
+                        <img src="{{ block.settings.sport_image | img_url: '400px', format: 'pjpg' }}" alt="{{ block.settings.sport_image.alt }}" />
+                    </div>
+                    <h3>{{ block.settings.sport_title }}</h3>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% schema %}
+  {
+    "name": "Sports section",
+    "settings": [],
+    "max_blocks": 6,
+    "blocks": [
+      {
+        "type": "sport",
+        "name": "Sport",
+        "settings": [
+          {
+            "id": "sport_title",
+            "type": "text",
+            "default": "Sport title",
+            "label": "Sport title"
+          },
+          {
+            "type": "image_picker",
+            "id": "sport_image",
+            "label": "Featured image"
+          }
+        ]
+      }
+    ],
+    "presets": [
+       {
+           "name": "Sports",
+           "category": "Home page"
+       }
+     ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

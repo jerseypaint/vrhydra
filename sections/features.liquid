@@ -1,0 +1,72 @@
+<section class="features">
+    <div class="vr_container">
+        <div class="vr_grid">
+            <div class="item">
+                <h2>{{ section.settings.features_title }}</h2>
+                <ul class="fa-ul">
+                    {% for block in section.blocks %}
+                    <li><i class="fas {{ block.settings.feature_icon }}"></i>{{ block.settings.feature_text }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="item">
+                <div class="accent-wrap">
+                    <div class="content-wrap">
+                        <img src="{{ section.settings.features_image | img_url: '1000px', format: 'pjpg' }}" alt="{{ block.settings.sport_image.alt }}" />
+                    </div>
+                </div>
+                <h3></h3>
+            </div>
+        </div>
+    </div>
+</section>
+{% schema %}
+  {
+    "name": "Features section",
+    "settings": [
+        {
+            "type": "text",
+            "id": "features_title",
+            "default": "Expereince the Difference",
+            "label": "Features heading text"
+        },
+        {
+            "type": "image_picker",
+            "id": "features_image",
+            "label": "Featured image"
+        }
+    ],
+    "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "id": "feature_icon",
+          "type": "text",
+          "default": "fa-running",
+          "label": "Feature icon"
+        },
+        {
+            "id": "feature_text",
+            "type": "textarea",
+            "default": "One or two sentences about this feature",
+            "label": "Feature text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+     {
+         "name": "Features",
+         "category": "Home page"
+     }
+   ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

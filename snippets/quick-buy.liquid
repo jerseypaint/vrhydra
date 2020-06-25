@@ -1,0 +1,47 @@
+{% form "product", product %}
+{% assign option_index = 0 %}
+{% assign values = '' %}
+
+
+{% for option in product.options_with_values %}
+{% assign option_index = forloop.index0 %}
+    {% assign downcased_option = option.name | downcase %}
+    {% if downcased_option contains 'color' or downcased_option contains 'colour' %}
+        {% assign is_color = true %}
+    {% endif %}
+    
+    {% if is_color %}
+        <div class="choice-color">
+            <h4>{{ option.name }}</h4>
+            {% for value in option.values %}
+                <input id="swatch-{{ value }}-{{ value | handle }}" type="radio" name="option-{{ value | escape }}" value="{{ value | escape }}"{% if forloop.first %} checked{% endif %} />
+                <label for="swatch-{{ value | escape }}-{{ value | handle }}">
+                    {{ value }}
+                </label>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="choice-size">
+            <h4>{{ option.name }}</h4>
+            {% for value in option.values %}
+                <input id="swatch-{{ value }}-{{ value | handle }}" type="radio" name="option-{{ value | escape }}" value="{{ value | escape }}"{% if forloop.first %} checked{% endif %} />
+                <label for="swatch-{{ value | escape }}-{{ value | handle }}">
+                    {{ value }}
+                </label>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endfor %}
+
+    <div class="choice-buttons">
+        <div class="accent-wrap">
+            <button type="submit" name="add" id="AddToCart">Add to cart</button>
+        </div>
+        <div class="accent-wrap alternate">
+            <a href="" class="alter">Learn More</a>
+        </div>
+    </div>
+
+
+
+{% endform %}

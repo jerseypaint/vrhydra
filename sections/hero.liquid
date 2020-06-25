@@ -1,0 +1,53 @@
+<section class="hero" style="background-image: url('{{ section.settings.background | img_url: format: 'pjpg' }}')";>
+    <div class="vr_container">
+        <div class="vr_grid">
+            <div class="content">
+                <h1>{{ section.settings.hero_title | escape }}</h1>
+                <div class="accent-wrap">
+                    <a class="button" href="{{ section.settings.hero_button_url }}">{{ section.settings.hero_button_text | escape }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% schema %}
+  {
+    "name": "Home page hero",
+    "settings": [
+        {
+            "type": "text",
+            "id": "hero_title",
+            "default": "Introducing the future of workout gloves",
+            "label": "Hero heading text"
+        },
+        {
+            "type": "text",
+            "id": "hero_button_text",
+            "default": "Shop now",
+            "label": "Hero button text"
+        },
+        {
+            "id": "hero_button_url",
+            "type": "url",
+            "label": "Hero button link"
+        },
+        {
+            "type": "image_picker",
+            "id": "background",
+            "label": "Background image"
+        }
+     ],
+     "presets": [
+        {
+            "name": "Hero",
+            "category": "Home page"
+        }
+      ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

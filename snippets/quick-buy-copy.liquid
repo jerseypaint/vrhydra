@@ -1,0 +1,15 @@
+{% form "product", product %}
+    {% if product.available and product.variants.size > 1 %}
+        {% for option in product.options %}
+        {% include 'swatch' with option %}
+        {% endfor %}
+    {% endif %}
+    <div class="choice-buttons">
+        <div class="accent-wrap">
+            <button type="submit" name="add" id="AddToCart">Add to cart</button>
+        </div>
+        <div class="accent-wrap alternate">
+            <a href="" class="alter">Learn More</a>
+        </div>
+    </div>
+{% endform %}

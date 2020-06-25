@@ -1,0 +1,245 @@
+// put your styles here
+@import url('https://fonts.googleapis.com/css2?family=Gothic+A1&family=Oswald:wght@700&display=swap');
+
+//colors
+$black: #000000;
+$brand: #F9C80E;
+$white: #FFFFFF;
+$light-grey: #FAFAFA;
+
+//fonts
+$base-font-size: 18px;
+$body-font-family: 'Gothic A1', sans-serif;
+$header-font-family: 'Oswald', sans-serif;
+
+//breakpoints
+$tablet: 767px;
+$desktop: 1280px;
+$widescreen: 1440px;
+
+body {
+    font-family: $body-font-family;
+    font-size: 16px;
+}
+
+h1, h2, h3, h4, h5, label {
+    font-family: $header-font-family;
+    text-transform: uppercase;
+}
+
+.vr_grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    @media (min-width: $desktop) {
+        grid-template-columns: repeat(12, 1fr)
+    }
+}
+
+section {
+    padding: 3rem 0;
+
+    @media (min-width: $tablet) {
+        padding: 6rem 0;
+    }
+
+    .vr_container {
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+}
+
+.accent-wrap {
+    display: inline-block;
+    position: relative;
+
+    button, a, input[type="submit"] {
+        display: inline-block;
+        position: relative;
+        margin-right: 7px;
+        margin-bottom: 7px;
+        background-color: $black;
+        border: 2px solid $black;
+        padding: 15px 38px;
+        color: $white;
+        text-transform: uppercase;
+        text-decoration: none;
+        z-index: 2;
+    }
+
+    .content-wrap {
+        display: inline-block;
+        position: relative;
+        margin-right: 21px;
+        margin-bottom: 21px;
+        z-index: 2;
+    }
+
+    &:before {
+        content:"";
+        display: block;
+        position: absolute;
+        top: 7px;
+        left: 7px;
+        background-color: $brand;
+        height: calc(100% - 7px);
+        width: calc(100% - 7px);
+        z-index: 1;
+    }
+    &.alternate {
+
+        button, a, input[type="submit"] {
+            background-color: $white;
+            color: $black;
+        }
+
+        &:before {
+            background-color: $black;
+        }
+    }
+}
+
+input, select {
+    display: inline-block;
+    position: relative;
+    background-color: $white;
+    border: 2px solid $black;
+    color: $black;
+    padding: 15px 38px;
+}
+
+.hero {
+    background-size: cover;
+
+    .content {
+        padding: 1rem;
+
+        @media (min-width: $tablet) {
+            grid-column: 3 / span 2;
+        }
+
+        @media (min-width: $desktop) {
+            grid-column: 7 / span 6;
+        }
+    }
+}
+
+.about {
+    .content {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+    }
+}
+
+.sports {
+    .item {
+        text-align: center;
+        padding: 0 1rem;
+        margin-bottom: 4rem;
+
+        .image-wrap {
+            margin: 0 auto;
+            height: 150px;
+            width: 150px;
+            border-radius: 100%;
+            overflow: hidden;
+
+            img {
+                height: auto;
+                min-height: 100%;
+                max-width: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
+        }
+
+        @media (min-width: $tablet) {
+            grid-column: span 2;
+        }
+
+        @media (min-width: $desktop) {
+            grid-column: span 4;
+        }
+    }
+}
+
+.features {
+    background-color: $black;
+    color: $white;
+
+    .item {
+
+        img {
+            max-height: 600px;
+            max-width: 100%;
+        }
+
+        @media (min-width: $tablet) {
+            grid-column: span 2;
+        }
+
+        @media (min-width: $desktop) {
+            grid-column: span 6;
+        }
+    }
+}
+
+.sell {
+    .item {
+        &:first-of-type {
+            text-align: center;
+
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+        }
+        @media (min-width: $desktop) {
+            grid-column: span 6;
+        }
+    }
+
+    form {
+        max-width: 380px;
+        margin: 0 auto;
+        
+        .choice-color {
+            select {
+                width: 100%;
+            }
+        }
+
+        .choice-size {
+            display: flex;
+            justify-content: space-between;
+            select {
+                margin-right: 8px;
+
+                &:last-of-type {
+                    margin-right: 0;
+                }
+            }
+        }
+
+        .choice-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+}
+
+.newsletter {
+    background-color: $brand;
+
+    .flex-grid {
+
+        .sign-up {
+            display: flex;
+        }       
+
+        @media (min-width: $desktop) {
+            display: flex;
+        }
+    }
+}

@@ -1,0 +1,54 @@
+<section class="about">
+    <div class="vr_container">
+        <div class="content">
+            <h2>{{ section.settings.about_title }}</h2>
+            <p>{{ section.settings.about_body }}</p>
+            <div class="accent-wrap">
+                <div class="content-wrap">
+                    <video controls="controls" style="max-width: 100%; height: auto;">
+                        <source src="{{ section.settings.about_video_url }}" type="video/mp4" />
+                      Your browser does not support our video.
+                      </video>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% schema %}
+  {
+    "name": "About section",
+    "settings": [
+        {
+            "type": "text",
+            "id": "about_title",
+            "default": "Hydration at your fingertips",
+            "label": "About heading text"
+        },
+        {
+            "type": "textarea",
+            "id": "about_body",
+            "default": "The VR-HYDRA Workout Glove holds 12oz water in each hand. With its enhanced grip and variable resistance itbeats any workout glove in the market!",
+            "label": "About body text"
+        },
+        {
+            "type": "video_url",
+            "id": "about_video_url",
+            "accept": ["youtube", "vimeo"],
+            "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "label": "About video"
+        }
+    ],
+    "presets": [
+       {
+           "name": "About",
+           "category": "Home page"
+       }
+     ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
