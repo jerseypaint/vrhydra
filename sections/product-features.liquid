@@ -1,0 +1,57 @@
+<section class="product-features">
+    <div class="vr_container">
+      <h2>{{ section.settings.features_title }}</h2>
+        <div class="vr_grid">
+            {% for block in section.blocks %}
+                <div class="item">
+                  <div class="inner-wrap">
+                    <div class="icon-wrap">
+                      <i class="fas {{ block.settings.feature_icon }} fa-4x"></i>
+                    </div>
+                    <p>{{ block.settings.feature_text}}</p>
+                  </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% schema %}
+  {
+    "name": "Product features section",
+    "settings": [
+        {
+          "type": "text",
+          "id": "features_title",
+          "default": "Fully featured workout glove",
+          "label": "Features heading text"
+      }
+    ],
+    "max_blocks": 4,
+    "blocks": [
+      {
+        "type": "feature",
+        "name": "Feature",
+        "settings": [
+          {
+            "id": "feature_icon",
+            "type": "text",
+            "default": "fa-running",
+            "label": "Feature icon"
+          },
+          {
+            "id": "feature_text",
+            "type": "textarea",
+            "default": "Add some text about this feature",
+            "label": "Feature text"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

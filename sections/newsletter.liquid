@@ -1,24 +1,72 @@
-<section>
+<section class="newsletter">
     <div class="vr_container">
         <div class="flex-grid">
-            <h2></h2>
-            <div class="sign-up">
-                <form action="">
-                    <input />
-                    <button type="submit"></button>
-                </form>
-            </div>
-            <div class="socials">
-                <a href=""></a>
-            </div>
+            <h2>{{ section.settings.newsletter_title }}</h2>
+            {% if settings.footer_newsletter_enable %}
+                <div class="sign-up">
+                    {% if settings.newsletter_form_action != blank %}
+                    <form action="{{ settings.newsletter_form_action }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" class="input-group">
+                        <input type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}" name="EMAIL" id="mail" class="input-group-field" aria-label="{{ 'general.newsletter_form.newsletter_email' | t }}" autocorrect="off" autocapitalize="off">
+                        <div class="accent-wrap">
+                            <input type="submit" class="btn" name="subscribe" id="subscribe" value="{{ 'general.newsletter_form.submit' | t }}">
+                        </div>                        
+                    </form>
+                    {% else %}
+                    {% form 'customer' %}
+                        {{ form.errors | default_errors }}
+                        {% if form.posted_successfully? %}
+                        <p class="note form-success">{{ 'general.newsletter_form.confirmation' | t }}</p>
+                        {% else %}
+                        <div class="input-group">
+                            <input type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}" name="contact[email]" id="Email" class="input-group-field" aria-label="{{ 'general.newsletter_form.newsletter_email' | t }}" autocorrect="off" autocapitalize="off">
+                            <input type="hidden" name="contact[tags]" value="newsletter">
+                            <div class="accent-wrap">
+                                <input type="submit" class="button" name="subscribe" id="subscribe" value="{{ 'general.newsletter_form.submit' | t }}">
+                            </div>                           
+                        </div>
+                        {% endif %}
+                    {% endform %}
+                    {% endif %}
+                </div>
+            {% endif %}
+            {% if settings.footer_social_enable %}
+                <div class="socials">
+                    <ul>
+                    {% if settings.social_twitter_link != blank %}
+                        <li>
+                        <a class="icon-fallback-text" href="{{ settings.social_twitter_link }}" title="{{ shop.name }} on Twitter">
+                            <span class="icon icon-twitter" aria-hidden="true"></span>
+                            <span class="fallback-text">Twitter</span>
+                        </a>
+                        </li>
+                    {% endif %}
+                    {% if settings.social_facebook_link != blank %}
+                        <li>
+                        <a class="icon-fallback-text" href="{{ settings.social_facebook_link }}" title="{{ shop.name }} on Facebook">
+                            <span class="icon icon-facebook" aria-hidden="true"></span>
+                            <span class="fallback-text">Facebook</span>
+                        </a>
+                        </li>
+                    {% endif %}
+                    </ul>
+                </div>
+            {% endif %}
         </div>
     </div>
 </section>
+
 {% schema %}
-  {
-    "name": "Section name",
-    "settings": []
-  }
+    {
+        "name": "Newsletter",
+        "settings": [
+            {
+                "type": "text",
+                "id": "newsletter_title",
+                "default": "Join Our Community",
+                "label": "Newsletter heading text"
+            }
+        ]
+    }
 {% endschema %}
 
 {% stylesheet %}

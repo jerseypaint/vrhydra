@@ -1,0 +1,70 @@
+    <!-- begin site-footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="vr_container">
+          <div class="vr_grid">
+            <div class="logo-wrap">
+                {% if settings.logo_use_image %}
+                    <a href="/" itemprop="url" class="site-header__logo-link">
+                        <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo">
+                    </a>
+                {% else %}
+                    <a href="/" itemprop="url">{{ shop.name }}</a>
+                {% endif %}
+            </div>
+            <ul>
+                {% for link in linklists.main-menu.links %}
+                <li>
+                    <a href="{{ link.url }}">{{ link.title }}</a>
+                </li>
+            {% endfor %}
+            </ul>
+        
+            <ul>
+                {% for link in linklists.informational.links %}
+                    <li>
+                        <a href="{{ link.url }}">{{ link.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+            {% if settings.footer_social_enable %}
+                  <ul class="flex-grid">
+                    {% if settings.social_twitter_link != blank %}
+                      <li>
+                        <a class="icon-fallback-text" href="{{ settings.social_twitter_link }}" title="{{ shop.name }} on Twitter">
+                          <span class="icon icon-twitter" aria-hidden="true"></span>
+                          <span class="fallback-text">Twitter</span>
+                        </a>
+                      </li>
+                    {% endif %}
+                    {% if settings.social_facebook_link != blank %}
+                      <li>
+                        <a class="icon-fallback-text" href="{{ settings.social_facebook_link }}" title="{{ shop.name }} on Facebook">
+                          <span class="icon icon-facebook" aria-hidden="true"></span>
+                          <span class="fallback-text">Facebook</span>
+                        </a>
+                      </li>
+                    {% endif %}
+                  </ul>
+            {% endif %}
+
+            {% unless shop.enabled_payment_types == empty %}
+                {% assign payment_icons_available = 'amazon_payments,american_express,bitcoin,cirrus,dankort,diners_club,discover,dogecoin,dwolla,forbrugsforeningen,interac,jcb,litecoin,maestro,master,paypal,visa' | split: ',' %}
+                <ul class="inline-list payment-icons">
+                    {% for type in shop.enabled_payment_types %}
+                    {% if payment_icons_available contains type %}
+                        <li>
+                        <span class="icon-fallback-text">
+                            <span class="icon icon-{{type}}" aria-hidden="true"></span>
+                            <span class="fallback-text">{{ type | replace: '_',' '}}</span>
+                        </span>
+                        </li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            {% endunless %}
+
+
+          </div>
+        </div>
+      </footer>
+      <!-- //site-footer -->

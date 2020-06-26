@@ -1,15 +1,39 @@
-{% form "product", product %}
+<form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm" class="form-vertical">
+    <div class="hidden-select" style="height:0; overflow: hidden;">
+        <select name="id" id="productSelect" class="product-single__variants" style="display: none;">
+            {% for variant in product.variants %}
+            {% if variant.available %}
+
+                {% comment %}
+                Note: if you use option_selection.js, your <select> tag will be overwritten, meaning what you have inside <option> will not reflect what you coded below.
+                {% endcomment %}
+                <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
+
+            {% else %}
+                <option disabled="disabled">
+                {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+                </option>
+            {% endif %}
+            {% endfor %}
+        </select>
+    </div>
     {% if product.available and product.variants.size > 1 %}
-        {% for option in product.options %}
-        {% include 'swatch' with option %}
-        {% endfor %}
+
+    <div class="choice-color">
+        {% include 'swatch' with 'Color' %}
+    </div>
+
+    <div class="choice-size">
+        {% include 'swatch' with 'Size' %}
+    </div>
+
     {% endif %}
     <div class="choice-buttons">
         <div class="accent-wrap">
             <button type="submit" name="add" id="AddToCart">Add to cart</button>
         </div>
         <div class="accent-wrap alternate">
-            <a href="" class="alter">Learn More</a>
+            <a href="/products/{{ product.handle }}" class="alternate">Learn More</a>
         </div>
     </div>
-{% endform %}
+</form>

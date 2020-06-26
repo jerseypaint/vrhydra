@@ -1,18 +1,18 @@
 <section class="features">
     <div class="vr_container">
         <div class="vr_grid">
-            <div class="item">
+            <div class="item content">
                 <h2>{{ section.settings.features_title }}</h2>
                 <ul class="fa-ul">
                     {% for block in section.blocks %}
-                    <li><i class="fas {{ block.settings.feature_icon }}"></i>{{ block.settings.feature_text }}</li>
+                    <li><i class="fas {{ block.settings.feature_icon }} fa-3x"></i>{{ block.settings.feature_text }}</li>
                     {% endfor %}
                 </ul>
             </div>
             <div class="item">
                 <div class="accent-wrap">
                     <div class="content-wrap">
-                        <img src="{{ section.settings.features_image | img_url: '1000px', format: 'pjpg' }}" alt="{{ block.settings.sport_image.alt }}" />
+                        <img src="{{ section.settings.featured_image | img_url: '1000px', format: 'pjpg' }}" alt="{{ block.settings.sport_image.alt }}" />
                     </div>
                 </div>
                 <h3></h3>
@@ -32,7 +32,7 @@
         },
         {
             "type": "image_picker",
-            "id": "features_image",
+            "id": "featured_image",
             "label": "Featured image"
         }
     ],

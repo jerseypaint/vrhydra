@@ -1,0 +1,60 @@
+<section class="instructions">
+    <div class="vr_container">
+        <div class="vr_grid">
+            <div class="item">
+                <div class="accent-wrap">
+                    <div class="content-wrap">
+                        <img src="{{ section.settings.featured_image | img_url: '1000px', format: 'pjpg' }}" alt="{{ block.settings.sport_image.alt }}" />
+                    </div>
+                </div>
+                <h3></h3>
+            </div>
+            <div class="item content">
+                <h2>{{ section.settings.instructions_title }}</h2>
+                <ol>
+                    {% for block in section.blocks %}
+                    <li>{{ block.settings.step_text }}</li>
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+{% schema %}
+  {
+    "name": "Instructions section",
+    "settings": [
+        {
+            "type": "text",
+            "id": "instructions_title",
+            "default": "Expereince the Difference",
+            "label": "Features heading text"
+        },
+        {
+            "type": "image_picker",
+            "id": "featured_image",
+            "label": "Featured image"
+        }
+    ],
+    "blocks": [
+    {
+      "type": "steps",
+      "name": "Steps",
+      "settings": [
+        {
+            "id": "step_text",
+            "type": "textarea",
+            "default": "One or two sentences about this step",
+            "label": "Step text"
+        }
+      ]
+    }
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

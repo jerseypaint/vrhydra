@@ -1,0 +1,29 @@
+<header class="site-header" role="banner">
+    <div class="flex-grid">
+
+        <button id="toggler" type="button" class="icon-fallback-text main-menu" aria-controls="NavDrawer" aria-expanded="false" onclick="makeNavAppear()">
+            <span aria-hidden="true">
+                <i></i>
+                <i></i>
+                <i></i>
+            </span>
+          </button>
+
+        <div class="logo-wrap" itemscope itemtype="http://schema.org/Organization">
+            {% if settings.logo_use_image %}
+                <a href="/" itemprop="url" class="site-header__logo-link">
+                    <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo">
+                </a>
+            {% else %}
+                <a href="/" itemprop="url">{{ shop.name }}</a>
+            {% endif %}
+        </div>
+        <div class="cart-wrap">
+            <a href="/cart" class="site-header__cart-toggle js-drawer-open-right {% if cart.item_count > 0 %}items-in-cart{% endif %}" aria-controls="CartDrawer" aria-expanded="false">
+              <i class="fas fa-shopping-cart"></i>
+              {{ 'layout.cart.title' | t }}
+            </a>
+          </div>
+
+    </div>
+  </header>

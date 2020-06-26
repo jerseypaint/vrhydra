@@ -1,0 +1,33 @@
+<section class="slider">
+  <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true, "ImagesLoaded": true, "bgLazyLoad": 1, "pageDots": false }'>
+    {% for block in section.blocks %}
+      <div class="carousel-cell" data-flickity-bg-lazyload="{{ block.settings.slide_image | img_url: 'master', format: 'pjpg' }}">
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% schema %}
+  {
+    "name": "Slider section",
+    "settings": [],
+    "blocks": [
+      {
+        "type": "slide",
+        "name": "Slide",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "slide_image",
+            "label": "Slide image"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

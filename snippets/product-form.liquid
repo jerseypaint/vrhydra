@@ -1,0 +1,53 @@
+<form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm" class="form-vertical">
+    <span class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
+    <span id="ProductPrice" class="h2" itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
+      {{ current_variant.price | money }}
+    </span>
+
+    {% if product.compare_at_price_max > product.price %}
+      <span class="visually-hidden">{{ 'products.general.sale_price' | t }}</span>
+      <p id="ComparePrice">
+        {{ 'products.product.compare_at' | t }} {{ current_variant.compare_at_price | money }}
+      </p>
+    {% endif %}
+
+    <p>{{ product.description }}</p>
+    <div class="hidden-select" style="height:0; overflow: hidden;">
+        <select name="id" id="productSelect" class="product-single__variants" style="display: none!important;">
+            {% for variant in product.variants %}
+            {% if variant.available %}
+    
+                {% comment %}
+                Note: if you use option_selection.js, your <select> tag will be overwritten, meaning what you have inside <option> will not reflect what you coded below.
+                {% endcomment %}
+                <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
+    
+            {% else %}
+                <option disabled="disabled">
+                {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+                </option>
+            {% endif %}
+            {% endfor %}
+        </select>
+    </div>
+
+    {% if product.available and product.variants.size > 1 %}
+
+    <div class="choice-color">
+        {% include 'swatch' with 'Color' %}
+    </div>
+
+    <div class="choice-size">
+        {% include 'swatch' with 'Size' %}
+    </div>
+    {% endif %}
+    <div class="choice-buttons">
+        <div class="qty-selector">
+            <label for="Quantity" class="quantity-selector">Quantity</label>
+            <input type="number" id="Quantity" name="quantity" value="1" min="1" class="quantity-selector">
+        </div> 
+        <div class="accent-wrap">
+            <button type="submit" name="add" id="AddToCart">Add to cart</button>
+        </div>
+    </div>
+</form>
